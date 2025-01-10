@@ -50,6 +50,17 @@ namespace Catalog.API.Controllers
             return Ok(products);
         }
 
+
+        [Route("{name}", Name = "GetProductByName")]
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProductByName(string name)
+        {
+            var products = await _repository.GetProductsByName(name);
+            return Ok(products);
+        }
+
+
         [HttpPost]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Product>> CreateProduct([FromBody] Product product)
